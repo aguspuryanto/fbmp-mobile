@@ -1,6 +1,6 @@
 <?php helper('my'); ?>
-
-<table class="table table-bordered">
+            <div class="table-responsive">
+                <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -27,3 +27,4 @@
                         <?php endforeach; ?>
                     </tbody>
                 </table>
+            </div>

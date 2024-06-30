@@ -2,7 +2,7 @@
 <?= $this->section('content') ?>
     
     <!-- Begin Page Content -->
-    <div class="container-fluid">
+    <div class="container my-5">
 
         <?php if (session('msg') !== null) : ?>
             <?= session('msg'); ?>
@@ -17,7 +17,7 @@
         </div>
         
         <div class="card">
-            <div class="card-body">
+            <div class="card-body m-0">
 
                 <?= $this->include('admin/products/_grid', ['products' => $products]) ?>
             </div>
