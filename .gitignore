@@ -76,7 +76,7 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 #-------------------------
 # Test Files
 #-------------------------
-tests/coverage*
+tests/*
 
 # Don't save phpunit under version control.
 phpunit
@@ -126,3 +126,5 @@ nb-configuration.xml
 /phpunit*.xml
 /.phpunit.*.cache
 
+# Codeigniter 4
+public/uploads/

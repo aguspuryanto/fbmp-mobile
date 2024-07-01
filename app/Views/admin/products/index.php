@@ -61,7 +61,50 @@
             });
             // console.log(selectedPost.length)
             if(selectedPost.length == 0) {
-                alert('')
+                alert('Silahkan pilih Produk untuk di Posting')
+            } else {
+                // publish
+                console.log(selectedPost, '_selected');
+                $.ajax({
+                    url: '<?= base_url('produk/publish') ?>',
+                    type: 'POST',
+                    data: {
+                        ids: selectedPost,
+                    },
+                    success: function (data) {
+                        console.log(data)
+                    },
+                    error: function (error) {
+                        console.log(error)
+                    },
+                })
+            }
+        });
+
+        $('.btn-hapus').click(function(){
+            var selectedPost = new Array();
+            $('input[name="row"]:checked').each(function() {
+                selectedPost.push(this.value);
+            });
+            // console.log(selectedPost.length)
+            if(selectedPost.length == 0) {
+                alert('Silahkan pilih Produk untuk di Hapus')
+            } else {
+                // publish
+                console.log(selectedPost, '_selected');
+                $.ajax({
+                    url: '<?= base_url('produk/delete') ?>',
+                    type: 'POST',
+                    data: {
+                        ids: selectedPost,
+                    },
+                    success: function (data) {
+                        console.log(data)
+                    },
+                    error: function (error) {
+                        console.log(error)
+                    },
+                })
             }
         });
     });

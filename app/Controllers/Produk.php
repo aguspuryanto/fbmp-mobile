@@ -46,7 +46,57 @@ class Produk extends ResourceController
      */
     public function show($id = null)
     {
+        $model = $this->itemModel; //new ProductModel();
+        if (!$model->find($id)) {
+            return redirect()->to('/produk')->with('msg', '<div class="alert alert-danger" role="alert">Data tidak ditemukan</div>');
+        }
+
+        $data['akuns'] = $this->akun->findAll();
+        $data['product'] = $model->find($id);
+        $data['categories'] = ['0' => 'Elektronik', '1' => 'Fashion', '2' => 'Makanan'];
+        $data['kondisi'] = ['0' => 'Baru', '1' => 'Bekas'];
+
+        return view('admin/products/_edit', $data);
+    }
+
+    /**
+     * Return the properties of a resource object.
+     *
+     * @param int|string|null $id
+     *
+     * @return ResponseInterface
+     */
+    public function publish($id = null)
+    {
         //
+        $ids = $this->request->getVar('ids');
+        $rowId = [];
+        foreach($ids as $id) {
+            $rowId[] = $id;
+        }
+
+        $builder = $this->db->table('products');
+        // $builder->update($data, ['id' => $id]);                
+        try {
+                    
+            $builder = $this->db->table('products');
+            $data = [
+                'status' => 1
+            ];
+
+            $res = $builder->update($data, ['id' => $id]);
+            if (!$res) {
+                // throw new \Exception('Could not insert data');
+                $resp = ['sukses' => false, 'msg' => 'Data gagal disimpan'];
+            }
+
+            echo json_encode($resp);
+        } catch (\Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n", var_dump($e->getMessage());
+        }
+
+        // echo json_encode($resp);
+        return redirect()->to('/produk')->with('msg', '<div class="alert alert-success" role="alert">Data disimpan</div>');
     }
 
     /**
@@ -151,8 +201,10 @@ class Produk extends ResourceController
             return redirect()->to('/produk')->with('msg', '<div class="alert alert-danger" role="alert">Data tidak ditemukan</div>');
         }
 
+        $data['akuns'] = $this->akun->findAll();
         $data['product'] = $model->find($id);
-        // echo json_encode($data['product']);
+        $data['categories'] = ['0' => 'Elektronik', '1' => 'Fashion', '2' => 'Makanan'];
+        $data['kondisi'] = ['0' => 'Baru', '1' => 'Bekas'];
 
         return view('admin/products/_edit', $data);
     }

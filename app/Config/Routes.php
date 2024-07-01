@@ -18,6 +18,8 @@ $routes->get('/dashboard', 'Dashboard::index', ['filter' => 'auth']);
 $routes->get('/produk', 'Produk::index', ['filter' => 'auth']);
 $routes->get('/produk/create', 'Produk::create');
 $routes->post('/produk/store', 'Produk::store');
+$routes->post('/produk/publish', 'Produk::publish');
+$routes->get('/produk/show/(:num)', 'Produk::show/$1');
 $routes->get('/produk/edit/(:num)', 'Produk::edit/$1');
 $routes->post('/produk/update/(:num)', 'Produk::update/$1');
 $routes->get('/produk/delete/(:num)', 'Produk::delete/$1');
