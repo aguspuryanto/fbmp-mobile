@@ -8,33 +8,48 @@ $actionUrl = isset($product['id']) ? '/produk/update/' . $product['id'] : '/prod
                     <input type="hidden" name="id" value="<?= isset($product['id']) ? $product['id'] : '' ?>">
                     
                     <div class="form-group">
-                        <label for="nama_akun">Pilih Akun</label>
-                        <input type="text" class="form-control" id="nama_akun" name="nama_akun" value="<?= isset($product['nama_akun']) ? $product['nama_akun'] : '' ?>" required>
+                        <label for="akun">Pilih Akun</label>
+                        <!-- <input type="text" class="form-control" id="akun" name="akun" value="<?= isset($product['akun']) ? $product['akun'] : '' ?>" required> -->
+                        <select class="form-control" id="akun" name="akun" required>
+                            <option value="">Pilih Akun</option>
+                            <?php foreach ($akuns as $key => $value) { ?>
+                                <option value="<?= $value['id'] ?>" <?= isset($product['akun']) && $product['akun'] == $value['id'] ? 'selected' : '' ?>><?= $value['username'] ?></option>
+                            <?php } ?>
+                        </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="nama_produk">Judul Produk</label>
-                        <input type="text" class="form-control" id="nama_produk" name="nama_produk" value="<?= isset($product['nama_produk']) ? $product['nama_produk'] : '' ?>" required>
+                        <label for="title">Judul Produk</label>
+                        <input type="text" class="form-control" id="title" name="title" value="<?= isset($product['title']) ? $product['title'] : '' ?>" required>
                     </div>
                     
                     <div class="form-group">
-                        <label for="harga">Harga</label>
-                        <input type="number" step="0.01" class="form-control" id="harga" name="harga" value="<?= isset($product['harga']) ? $product['harga'] : '' ?>" required>
+                        <label for="price">Harga</label>
+                        <input type="number" step="0.01" class="form-control" id="price" name="price" value="<?= isset($product['price']) ? $product['price'] : '' ?>" required>
                     </div>
 
                     <div class="form-group">
                         <label for="category">Category</label>
-                        <input type="text" class="form-control" id="category" name="category" value="<?= isset($product['category']) ? $product['category'] : '' ?>">
+                        <select class="form-control" id="category" name="category" required>
+                            <option value="">Pilih Category</option>
+                            <?php foreach ($categories as $key => $value) { ?>
+                                <option value="<?= $key ?>" <?= isset($product['category']) && $product['category'] == $key ? 'selected' : '' ?>><?= $value ?></option>
+                            <?php } ?>
+                        </select>
                     </div>
 
                     <div class="form-group">
                         <label for="condition">Kondisi</label>
-                        <input type="text" class="form-control" id="condition" name="condition" value="<?= isset($product['condition']) ? $product['condition'] : '' ?>">
+                        <select class="form-control" id="condition" name="condition" required>
+                            <option value="">Pilih Kondisi</option>
+                            <option value="baru" <?= isset($product['condition']) && $product['condition'] == 'baru' ? 'selected' : '' ?>>Baru</option>
+                            <option value="bekas" <?= isset($product['condition']) && $product['condition'] == 'bekas' ? 'selected' : '' ?>>Bekas</option>
+                        </select>
                     </div>
                     
                     <div class="form-group">
-                        <label for="deskripsi">Deskripsi</label>
-                        <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3"> <?= isset($product['deskripsi']) ? $product['deskripsi'] : '' ?></textarea>
+                        <label for="description">Deskripsi</label>
+                        <textarea class="form-control" id="description" name="description" rows="3"> <?= isset($product['description']) ? $product['description'] : '' ?></textarea>
                     </div>
 
                     <div class="form-group">

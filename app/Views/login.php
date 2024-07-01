@@ -53,15 +53,15 @@
                                             <input type="password" name="password" class="form-control" id="InputForPassword">
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-block">Login</button>
-                                        <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+                                        <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>
                                     </form>
-                                    <hr>
+                                    <!-- <hr>
                                     <div class="text-center">
                                         <a class="small" href="forgot-password.html">Forgot Password?</a>
                                     </div>
                                     <div class="text-center">
                                         <a class="small" href="register.html">Create an Account!</a>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>

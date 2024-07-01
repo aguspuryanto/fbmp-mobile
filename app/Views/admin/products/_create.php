@@ -10,7 +10,7 @@
             <!-- <div class="card-header">Featured</div> -->
             <div class="card-body m-0">
 
-                <?= $this->include('admin/products/_form', ['product' => $product, 'urlform' => '/produk/store']) ?>
+                <?= $this->include('admin/products/_form') ?>
             </div>
         </div>
 

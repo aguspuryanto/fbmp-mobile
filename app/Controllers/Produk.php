@@ -6,15 +6,18 @@ use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\RESTful\ResourceController;
 
 use App\Models\ProductModel;
+use App\Models\UserModel;
 
 class Produk extends ResourceController
 {
     private $db;
+    private $akun;
     public $itemModel;
     
     public function __construct()
     {
         $this->db = \Config\Database::connect();
+        $this->akun = new UserModel();
         $this->itemModel = new ProductModel();
         helper(["url","form"]);
     }
@@ -27,6 +30,7 @@ class Produk extends ResourceController
     public function index()
     {
         $model = $this->itemModel; //new ProductModel();
+        $data['akuns'] = $this->akun->findAll();
         $data['products'] = $model->findAll();
         
         return view('admin/products/index', $data);
@@ -56,24 +60,23 @@ class Produk extends ResourceController
 
         // lakukan validasi
         $validation =  \Config\Services::validation();
-        $validation->setRules(['gambar' => 'required']);
-        $validation->setRules(['nama_produk' => 'required']);
-        $validation->setRules(['deskripsi' => 'required']);
-        $validation->setRules(['harga' => 'required']);
-        $validation->setRules(['harga_diskon' => 'required']);
-        $validation->setRules(['pstatus' => 'required']);
+        $validation->setRules(['akun' => 'required']);
+        $validation->setRules(['title' => 'required']);
+        $validation->setRules(['price' => 'required']);
+        $validation->setRules(['category' => 'required']);
+        $validation->setRules(['condition' => 'required']);
+        $validation->setRules(['description' => 'required']);
         $validation->setRules(['label' => 'required']);
-        $validation->setRules(['label_color' => 'required']);
-        $validation->setRules(['link_order' => 'required']);
+        $validation->setRules(['target' => 'required']);
+        // $validation->setRules(['gambar' => 'required']);
 
         $isDataValid = $validation->withRequest($this->request)->run();
         
         // jika data valid, simpan ke database
-        if($isDataValid){
-
-            $model = $this->itemModel; //new ProductModel();
-            // $data = $this->request->getPost();
-            // echo json_encode($data);
+        if(!$isDataValid){
+            // echo $validation->listErrors();
+            return redirect()->to('/produk')->with('msg', '<div class="alert alert-danger" role="alert">' . $validation->listErrors() . '</div>');
+        } else {
 
             $file = $this->request->getFile('gambar');
 
@@ -82,30 +85,21 @@ class Produk extends ResourceController
                 $file->move($uploads_path, $fileName);
 
                 $data = [
-                    'gambar' => $fileName,
-                    'nama_produk' => $this->request->getVar('nama_produk'),
-                    'deskripsi' => trim($this->request->getVar('deskripsi')),
-                    'harga' => $this->request->getVar('harga'),
-                    'harga_diskon' => $this->request->getVar('harga_diskon'),
-                    'pstatus' => $this->request->getVar('pstatus'),
+                    'akun' => $this->request->getVar('akun'),
+                    'title' => $this->request->getVar('title'),
+                    'description' => trim($this->request->getVar('description')),
                     'label' => $this->request->getVar('label'),
-                    'label_color' => $this->request->getVar('label_color'),
-                    'link_order' => $this->request->getVar('link_order'),
+                    'target' => $this->request->getVar('target'),
+                    'price' => $this->request->getVar('price'),
+                    'category' => $this->request->getVar('category'),
+                    'condition' => $this->request->getVar('condition'),
+                    'status' => $this->request->getVar('status') ? 1 : 0,
+                    'gambar' => $fileName,
                     'created_at' => date("Y-m-d H:i:s"),
                 ];
-
-                // if($this->request->getVar('id')){
-                //     $data['id'] = $this->request->getVar('id');
-                // }
-
-                // echo json_encode($data);
-                // $sql = "INSERT INTO products (" . implode(', ', array_keys($data)) . ") SELECT '" . implode("', '", array_values($data)) . "'";
-                // echo $sql;
-
-                // $model->save($data);
-                // $model->insert($data);
+                
                 try {
-                    // $model->insert($data);
+                    
                     $builder = $this->db->table('products');
                     $res = $builder->insert($data);
                     if (!$res) {
@@ -118,8 +112,6 @@ class Produk extends ResourceController
             }
 
             return redirect()->to('/produk')->with('msg', '<div class="alert alert-success" role="alert">Data disimpan</div>');
-        } else {
-            return redirect()->to('/produk')->with('msg', '<div class="alert alert-danger" role="alert">' . $validation->listErrors() . '</div>');
         }
     }
 
@@ -131,7 +123,16 @@ class Produk extends ResourceController
     public function create()
     {
         // $model = $this->itemModel; //new ProductModel();
-        $data['product'] = [];
+        $data['akuns'] = $this->akun->where('status', 'aktif')->findAll();
+        $data['categories'] = [
+            '0' => 'Elektronik',
+            '1' => 'Fashion',
+            '2' => 'Makanan',
+        ];
+        $data['kondisi'] = [
+            '0' => 'Baru',
+            '1' => 'Bekas',
+        ];
 
         return view('admin/products/_create', $data);
     }
@@ -170,9 +171,9 @@ class Produk extends ResourceController
         // lakukan validasi
         $validation =  \Config\Services::validation();
         $validation->setRules(['gambar' => 'required']);
-        $validation->setRules(['nama_produk' => 'required']);
-        $validation->setRules(['deskripsi' => 'required']);
-        $validation->setRules(['harga' => 'required']);
+        $validation->setRules(['title' => 'required']);
+        $validation->setRules(['description' => 'required']);
+        $validation->setRules(['price' => 'required']);
         // $validation->setRules(['harga_diskon' => 'required']);
         // $validation->setRules(['pstatus' => 'required']);
         // $validation->setRules(['label' => 'required']);
@@ -182,21 +183,23 @@ class Produk extends ResourceController
         $isDataValid = $validation->withRequest($this->request)->run();
         
         // jika data valid, simpan ke database
-        if($isDataValid){
-
+        if(!$isDataValid){
+            return redirect()->to('/produk')->with('msg', '<div class="alert alert-danger" role="alert">' . $validation->listErrors() . '</div>');
+        } else {
+            
             $model = $this->itemModel; //new ProductModel();
             $file = $this->request->getFile('gambar');
 
             $data = [
-                // 'gambar' => $fileName,
-                'nama_produk' => $this->request->getVar('nama_produk'),
-                'deskripsi' => $this->request->getVar('deskripsi'),
-                'harga' => $this->request->getVar('harga'),
-                'harga_diskon' => $this->request->getVar('harga_diskon'),
-                'pstatus' => $this->request->getVar('pstatus'),
+                'akun' => $this->request->getVar('akun'),
+                'title' => $this->request->getVar('title'),
+                'price' => $this->request->getVar('price'),
+                'category' => $this->request->getVar('category'),
+                'condition' => $this->request->getVar('condition'),
+                'description' => trim($this->request->getVar('description')),
                 'label' => $this->request->getVar('label'),
-                'label_color' => $this->request->getVar('label_color'),
-                'link_order' => $this->request->getVar('link_order'),
+                'target' => $this->request->getVar('target'),
+                'updated_at' => date("Y-m-d H:i:s"),
             ];
 
             if ($file->isValid() && !$file->hasMoved()) {
@@ -215,8 +218,6 @@ class Produk extends ResourceController
 
             // return redirect()->to(current_url())->with('msg', '<div class="alert alert-success" role="alert">Data disimpan</div>');
             return redirect()->to('/produk')->with('msg', '<div class="alert alert-success" role="alert">Data disimpan</div>');
-        } else {
-            return redirect()->to('/produk')->with('msg', '<div class="alert alert-danger" role="alert">' . $validation->listErrors() . '</div>');
         }
     }
 

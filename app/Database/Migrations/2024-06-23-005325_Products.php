@@ -46,6 +46,10 @@ class Products extends Migration
                 'type'          => 'VARCHAR',
                 'constraint'    => 200
             ],
+            'status'    => [
+                'type'          => 'VARCHAR',
+                'constraint'    => 200
+            ],
             'gambar'       => [
                 'type'       => 'VARCHAR',
                 'constraint' => '255',

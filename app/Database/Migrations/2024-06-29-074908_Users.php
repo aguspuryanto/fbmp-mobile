@@ -38,6 +38,7 @@ class Users extends Migration
 			'project_name' => [
 				'type'           => 'VARCHAR',
 				'constraint'     => '255',
+				'null'			=> true
 			],
 			'created_at'      => [
 				'type'           => 'TIMESTAMP',

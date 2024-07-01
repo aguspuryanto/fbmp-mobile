@@ -15,13 +15,55 @@
                 <a href="/produk/create" class="btn btn-primary mb-3">Tambah Produk</a>
             </div>
         </div>
-        
-        <div class="card">
+
+        <div class="card mb-5">
             <div class="card-body m-0">
 
                 <?= $this->include('admin/products/_grid', ['products' => $products]) ?>
             </div>
         </div>
+        
+        <div class="row mb-3">
+            <div class="col">
+                <button type="button" class="btn btn-warning btn-lg btn-block btn-post">Posting</button>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-warning btn-lg btn-block btn-hapus">Hapus</button>
+            </div>
+        </div>
+        <a href="<?= base_url('dashboard') ?>" class="btn btn-warning btn-lg btn-block">Menu Utama</a>
     </div>
 
+<?= $this->endSection() ?>
+
+
+<?= $this->section('styles') ?>
+<!-- <link href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" rel="stylesheet"> -->
+<?= $this->endSection() ?>
+
+<?= $this->section('javascript') ?>
+<!-- <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script> -->
+<script>
+    // new DataTable('#example');
+    $(function(){
+        $('.checkAll').click(function(){
+            if (this.checked) {
+                $(".checkboxes").prop("checked", true);
+            } else {
+                $(".checkboxes").prop("checked", false);
+            }	
+        });
+
+        $('.btn-post').click(function(){
+            var selectedPost = new Array();
+            $('input[name="row"]:checked').each(function() {
+                selectedPost.push(this.value);
+            });
+            // console.log(selectedPost.length)
+            if(selectedPost.length == 0) {
+                alert('')
+            }
+        });
+    });
+</script>
 <?= $this->endSection() ?>
