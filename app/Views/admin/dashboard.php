@@ -57,7 +57,7 @@
 
                     <a href="<?= base_url('akun') ?>" class="btn btn-warning btn-lg btn-block">Tambah Akun</a>
                     <a href="<?= base_url('produk') ?>" class="btn btn-warning btn-lg btn-block">Upload Produk</a>
-                    <a href="<?= base_url('optimasi') ?>" class="btn btn-warning btn-lg btn-block">Optimasi</a>                    
+                    <!-- <a href="<?= base_url('optimasi') ?>" class="btn btn-warning btn-lg btn-block">Optimasi</a> -->
 
                 </div>
                 <!-- /.container-fluid -->
