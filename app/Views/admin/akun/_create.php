@@ -11,7 +11,7 @@
         <!-- Page Heading -->
         <h2 class="mt-0 text-center"><?= $title ?></h2>
 
-        <div class="card">
+        <div class="card mb-5">
             <div class="card-body">
 
                 <?= $this->include('admin/akun/_form') ?>
