@@ -94,9 +94,8 @@
                 console.log(selectedPost, '_selected');
                 $.ajax({
                     url: '<?= base_url('produk/delete') ?>',
-                    type: 'POST',
                     data: {
-                        ids: selectedPost,
+                        id: (selectedPost),
                     },
                     success: function (data) {
                         console.log(data)

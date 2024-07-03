@@ -283,10 +283,20 @@ class Produk extends ResourceController
      */
     public function delete($id = null)
     {
-        $model = new ProductModel();
-        $model->delete($id);
+        if($this->request->getVar('id')) {
+            $id = $this->request->getVar('id');
+            foreach($id as $id) {
+                // echo 'ID: ' . $id . PHP_EOL;
+                $this->itemModel->delete($id);
+            }
+        }
 
-        return redirect()->to('/produk');
+        if($id) {
+            $model = $this->itemModel; //new ProductModel();
+            $model->delete($id);            
+        }
+
+        // return redirect()->to('/produk');
     }
 
     private function ensureUploadsDirectoryExists()

@@ -13,7 +13,8 @@ class ProdukSeeder extends Seeder
         // 'akun','title','description','label','target','price','category','condition','gambar'
         
         // $produk = [];
-        for ($i = 0; $i <= 20; $i++) {
+        $path = base_url('uploads/') . date('Y') . '/' . date('m') . '/';
+        for ($i = 0; $i < 20; $i++) {
             $data = [
                 'akun' => $faker->name(),
                 'title' => $faker->title(),
@@ -23,7 +24,7 @@ class ProdukSeeder extends Seeder
                 'price' => $faker->randomNumber(2),
                 'category' => $faker->randomElement(['Kamera', 'Laptop', 'Smartphone']),
                 'condition' => $faker->randomElement(['Baru', 'Bekas']),
-                'gambar' => $faker->name() . '.jpg'
+                'gambar' => $faker->image(null, 360, 360, 'animals', false)
             ];
 
             $this->db->table('products')->insert($data);
