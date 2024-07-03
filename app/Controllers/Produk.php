@@ -296,7 +296,7 @@ class Produk extends ResourceController
             $model->delete($id);            
         }
 
-        // return redirect()->to('/produk');
+        return redirect()->to('/produk');
     }
 
     private function ensureUploadsDirectoryExists()
