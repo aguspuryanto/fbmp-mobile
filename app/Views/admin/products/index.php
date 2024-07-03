@@ -92,22 +92,24 @@
             } else {
                 // publish
                 console.log(selectedPost, '_selected');
-                $.ajax({
-                    url: '<?= base_url('produk/remove') ?>',
-                    type: 'POST',
-                    data: {
-                        id: JSON.stringify(selectedPost),
-                    },
-                    success: function (data) {
-                        console.log(data);
-                        if(data.success==true) {
-                            location.reload();
-                        }
-                    },
-                    error: function (error) {
-                        console.log(error)
-                    },
-                })
+                if(confirm("Apakah anda yakin ingin menghapus produk?")) {
+                    $.ajax({
+                        url: '<?= base_url('produk/remove') ?>',
+                        type: 'POST',
+                        data: {
+                            id: JSON.stringify(selectedPost),
+                        },
+                        success: function (data) {
+                            console.log(data);
+                            if(data.success==true) {
+                                location.reload();
+                            }
+                        },
+                        error: function (error) {
+                            console.log(error)
+                        },
+                    });
+                }
             }
         });
     });
