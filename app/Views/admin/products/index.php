@@ -19,7 +19,7 @@
         <div class="card mb-5">
             <div class="card-body m-0">
 
-                <?= $this->include('admin/products/_grid', ['products' => $products]) ?>
+                <?= $this->include('admin/products/_grid') ?>
             </div>
         </div>
         

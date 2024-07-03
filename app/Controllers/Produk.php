@@ -31,7 +31,8 @@ class Produk extends ResourceController
     {
         $model = $this->itemModel; //new ProductModel();
         $data['akuns'] = $this->akun->findAll();
-        $data['products'] = $model->findAll();
+        $data['products'] = $model->paginate(10);
+        $data['pager'] = $model->pager;
         
         return view('admin/products/index', $data);
         // return view('admin/produk');

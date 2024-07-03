@@ -48,3 +48,7 @@
                     </tbody>
                 </table>
             </div>
+
+            <div style="float: right">
+            <?php echo $pager->links('default', 'default_full') ?>
+            </div>

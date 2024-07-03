@@ -1,3 +1,28 @@
+html, body {
+  background-color: #001f7f;
+  height: 100%;
+}
+
 #wrapper #content-wrapper {
   background-color: #001f7f !important;
+}
+
+/* Small devices (landscape phones) */
+@media (min-width: 576px) {
+  .container { width: 540px; }
+}
+
+/* Medium devices (tablets) */
+@media (min-width: 768px) {
+  .container { width: 540px; }
+}
+
+/* Large devices (desktops) */
+@media (min-width: 992px) {
+  .container { width: 540px; }
+}
+
+/* Extra large devices (large desktops) */
+@media (min-width: 1200px) {
+  .container { width: 540px; }
 }
