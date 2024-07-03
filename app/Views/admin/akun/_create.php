@@ -17,6 +17,8 @@
                 <?= $this->include('admin/akun/_form') ?>
             </div>
         </div>
+        
+        <a href="<?= base_url('dashboard') ?>" class="btn btn-warning btn-lg btn-block">Menu Utama</a>
     </div>
 
 <?= $this->endSection() ?>
