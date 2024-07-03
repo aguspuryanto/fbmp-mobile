@@ -93,12 +93,16 @@
                 // publish
                 console.log(selectedPost, '_selected');
                 $.ajax({
-                    url: '<?= base_url('produk/delete') ?>',
+                    url: '<?= base_url('produk/remove') ?>',
+                    type: 'POST',
                     data: {
-                        id: (selectedPost),
+                        id: JSON.stringify(selectedPost),
                     },
                     success: function (data) {
-                        console.log(data)
+                        console.log(data);
+                        if(data.success==true) {
+                            location.reload();
+                        }
                     },
                     error: function (error) {
                         console.log(error)

@@ -283,20 +283,23 @@ class Produk extends ResourceController
      */
     public function delete($id = null)
     {
-        if($this->request->getVar('id')) {
-            $id = $this->request->getVar('id');
-            foreach($id as $id) {
-                // echo 'ID: ' . $id . PHP_EOL;
-                $this->itemModel->delete($id);
-            }
-        }
-
         if($id) {
             $model = $this->itemModel; //new ProductModel();
-            $model->delete($id);            
+            $model->delete($id);
         }
 
-        return redirect()->to('/produk');
+        return redirect()->to('/produk')->with('msg', '<div class="alert alert-success" role="alert">Data terhapus</div>');
+    }
+
+    public function remove() {
+        $post = json_decode($this->request->getVar('id'));
+        foreach($post as $id) {
+            // echo 'ID: ' . $id . PHP_EOL;
+            $this->itemModel->delete($id);
+        }
+
+        return $this->response->setJSON(['success' => true, 'message' => 'Data terhapus']);
+        // return redirect()->to('/produk')->with('msg', '<div class="alert alert-success" role="alert">Data terhapus</div>');
     }
 
     private function ensureUploadsDirectoryExists()

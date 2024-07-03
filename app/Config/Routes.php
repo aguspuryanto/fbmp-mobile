@@ -22,7 +22,8 @@ $routes->post('/produk/publish', 'Produk::publish');
 $routes->get('/produk/show/(:num)', 'Produk::show/$1');
 $routes->get('/produk/edit/(:num)', 'Produk::edit/$1');
 $routes->post('/produk/update/(:num)', 'Produk::update/$1');
-$routes->get('/produk/delete', 'Produk::delete');
+$routes->get('/produk/delete/(:num)', 'Produk::delete/$1');
+$routes->post('/produk/remove', 'Produk::remove');
 
 $routes->get('/akun', 'Akun::index', ['filter' => 'auth']);
 $routes->get('/akun/create', 'Akun::create');
