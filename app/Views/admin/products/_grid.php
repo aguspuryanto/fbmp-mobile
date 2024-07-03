@@ -32,7 +32,7 @@
                             <td><?= getCurrency($product['price']) ?></td>
                             <td><?= $product['category'] ?></td>
                             <td><?= $product['condition'] ?></td>
-                            <td><?= $product['description'] ?></td>
+                            <td><p class="text-nowrap"><?= $product['description'] ?></p></td>
                             <td><?= $product['label'] ?></td>
                             <td><?= $product['target'] ?></td>
                             <td><?= ($product['status']=="1") ? 'Publish' : 'Pending'; ?></td>
