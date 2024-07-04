@@ -1,49 +1,109 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
+
+<head>
+
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
- 
-    <title>Register</title>
-  </head>
-  <body>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Login</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="<?= base_url() ?>/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="<?= base_url() ?>/assets/css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-gradient-primary">
+
     <div class="container">
-        <div class="row justify-content-md-center">
- 
-            <div class="col-6">
-                <h1>Sign Up</h1>
-                <?php if(isset($validation)):?>
-                    <div class="alert alert-danger"><?= $validation->listErrors() ?></div>
-                <?php endif;?>
-                <form action="/register/save" method="post">
-                    <div class="mb-3">
-                        <label for="InputForName" class="form-label">Name</label>
-                        <input type="text" name="name" class="form-control" id="InputForName" value="<?= set_value('name') ?>">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-lg-6">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Register</h1>
+                                    </div>
+                                    <?php if(session()->getFlashdata('msg')):?>
+                                        <div class="alert alert-danger"><?= session()->getFlashdata('msg') ?></div>
+                                    <?php endif;?>
+                                    <form action="/register/save" method="post">
+                                        <div class="mb-3">
+                                            <label for="InputForName" class="form-label">Nama Lengkap</label>
+                                            <input type="text" name="name" class="form-control" id="InputForName" value="<?= set_value('name') ?>">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="InputForNowa" class="form-label">No Wa</label>
+                                            <input type="text" name="nowa" class="form-control" id="InputForNowa" value="<?= set_value('nowa') ?>">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="InputForEmail" class="form-label">Email address</label>
+                                            <input type="email" name="email" class="form-control" id="InputForEmail" value="<?= set_value('email') ?>">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="InputForPassword" class="form-label">Password</label>
+                                            <input type="password" name="password" class="form-control" id="InputForPassword">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="InputForCity" class="form-label">Kota Domisili</label>
+                                            <input type="text" name="kota" class="form-control" id="InputForCity">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="InputForPaket" class="form-label">Paket</label>
+                                            <select name="paket" id="InputForPaket" class="form-select form-control">
+                                                <option value="paket1">Paket 1 Bulan</option>
+                                                <option value="paket2">Paket 3 Bulan</option>
+                                                <option value="paket3">Paket 6 Bulan</option>
+                                                <option value="paket4">Paket 12 Bulan</option>
+                                            </select>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Register</button>
+                                    </form>
+                                    <!-- <hr>
+                                    <div class="text-center">
+                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                    </div>
+                                    <div class="text-center">
+                                        <a class="small" href="register.html">Create an Account!</a>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="InputForEmail" class="form-label">Email address</label>
-                        <input type="email" name="email" class="form-control" id="InputForEmail" value="<?= set_value('email') ?>">
-                    </div>
-                    <div class="mb-3">
-                        <label for="InputForPassword" class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control" id="InputForPassword">
-                    </div>
-                    <div class="mb-3">
-                        <label for="InputForConfPassword" class="form-label">Confirm Password</label>
-                        <input type="password" name="confpassword" class="form-control" id="InputForConfPassword">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Register</button>
-                </form>
+                </div>
+
             </div>
-             
+
         </div>
+
     </div>
-     
-    <!-- Popper.js first, then Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
-  </body>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="<?= base_url() ?>/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="<?= base_url() ?>/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="<?= base_url() ?>/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="<?= base_url() ?>/assets/js/sb-admin-2.min.js"></script>
+
+</body>
+
 </html>

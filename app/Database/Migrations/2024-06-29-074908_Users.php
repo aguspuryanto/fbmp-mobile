@@ -40,6 +40,18 @@ class Users extends Migration
 				'constraint'     => '255',
 				'null'			=> true
 			],
+			'nowa' => [
+				'type'           => 'VARCHAR',
+				'constraint'     => '255',
+			],
+			'kota' => [
+				'type'           => 'VARCHAR',
+				'constraint'     => '255',
+			],
+			'paket' => [
+				'type'           => 'VARCHAR',
+				'constraint'     => '255',
+			],
 			'created_at'      => [
 				'type'           => 'TIMESTAMP',
 				'null'           => true,
