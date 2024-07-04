@@ -41,7 +41,7 @@
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
                                     <?php if(session()->getFlashdata('msg')):?>
-                                        <div class="alert alert-danger"><?= session()->getFlashdata('msg') ?></div>
+                                        <?= session()->getFlashdata('msg') ?>
                                     <?php endif;?>
                                     <form action="/login/auth" method="post">
                                         <div class="mb-3">

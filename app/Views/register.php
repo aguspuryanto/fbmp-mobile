@@ -41,12 +41,12 @@
                                         <h1 class="h4 text-gray-900 mb-4">Register</h1>
                                     </div>
                                     <?php if(session()->getFlashdata('msg')):?>
-                                        <div class="alert alert-danger"><?= session()->getFlashdata('msg') ?></div>
+                                        <?= session()->getFlashdata('msg') ?>
                                     <?php endif;?>
                                     <form action="/register/save" method="post">
                                         <div class="mb-3">
                                             <label for="InputForName" class="form-label">Nama Lengkap</label>
-                                            <input type="text" name="name" class="form-control" id="InputForName" value="<?= set_value('name') ?>">
+                                            <input type="text" name="username" class="form-control" id="InputForName" value="<?= set_value('username') ?>">
                                         </div>
                                         <div class="mb-3">
                                             <label for="InputForNowa" class="form-label">No Wa</label>

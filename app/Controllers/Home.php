@@ -33,12 +33,12 @@ class Home extends BaseController
                 $session->set($ses_data);
                 return redirect()->to('/dashboard');
             }else{
-                $session->setFlashdata('msg', 'Wrong Password');
-                return redirect()->to('/login');
+                // $session->setFlashdata('msg', 'Wrong Password');
+                return redirect()->to('/login')->with('msg', '<div class="alert alert-danger" role="alert">Wrong Password</div>');
             }
         }else{
-            $session->setFlashdata('msg', 'Email not Found');
-            return redirect()->to('/login');
+            // $session->setFlashdata('msg', 'Email not Found');
+            return redirect()->to('/login')->with('msg', '<div class="alert alert-danger" role="alert">Email not Found</div>');
         }
     }
  
